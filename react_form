@@ -1,0 +1,148 @@
+react-form-practical
+│
+├── node_modules
+├── public
+│     └── index.html
+│
+├── src
+│     ├── components
+│     │      └── RegistrationForm.js
+│     │
+│     ├── App.js
+│     ├── index.js
+│     └── App.css
+│
+├── package.json
+└── README.md
+--------------------------------------------------------------------------------------------
+📂 src/index.js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+-----------------------------------
+📂 src/App.js
+import React from "react";
+import RegistrationForm from "./components/RegistrationForm";
+
+function App() {
+  return (
+    <div>
+      <RegistrationForm />
+    </div>
+  );
+}
+
+export default App;
+--------------------------------------------------
+📂 src/components/RegistrationForm.js
+import React, { useState } from "react";
+
+function RegistrationForm() {
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+
+  const [submittedData, setSubmittedData] = useState(null);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setSubmittedData(formData);
+
+    setFormData({
+      name: "",
+      email: "",
+      password: ""
+    });
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "40px" }}>
+
+      <h2>Registration Form</h2>
+
+      <form onSubmit={handleSubmit}>
+
+        <div>
+          <label>Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <br />
+
+        <button type="submit">Submit</button>
+
+      </form>
+
+      {submittedData && (
+        <div>
+          <h3>Submitted Data</h3>
+          <p>Name: {submittedData.name}</p>
+          <p>Email: {submittedData.email}</p>
+          <p>Password: {submittedData.password}</p>
+        </div>
+      )}
+
+    </div>
+  );
+}
+
+export default RegistrationForm;
+------------------------------------------------------
+📂 public/index.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>React Form Practical</title>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+</body>
+</html>
