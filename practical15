@@ -1,0 +1,74 @@
+react-function-prop
+│
+├── src
+│   ├── App.jsx
+│   ├── Parent.jsx
+│   ├── Child.jsx
+│   └── main.jsx
+│
+├── index.html
+└── package.json
+-------------------------------
+main.jsx code=
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+------------------------------
+App.jsx code =
+import Parent from "./Parent";
+
+function App() {
+  return (
+    <div style={{ textAlign: "center", marginTop: "40px" }}>
+      <h1>React Function Props Example</h1>
+      <Parent />
+    </div>
+  );
+}
+
+export default App;
+
+-------------------------------------------
+Parent.jsx code-
+import Child from "./Child";
+
+function Parent() {
+
+  // Function defined in parent
+  function showMessage(name) {
+    alert("Hello, " + name + "!");
+  }
+
+  return (
+    <div>
+      <h2>This is Parent Component</h2>
+
+      {/* Passing function as prop */}
+      <Child greet={showMessage} />
+    </div>
+  );
+}
+
+export default Parent;
+---------------------------------------
+Child.jsx code =
+function Child(props) {
+  return (
+    <div>
+      <h3>This is Child Component</h3>
+
+      <button onClick={() => props.greet("React User")}>
+        Click to Greet
+      </button>
+    </div>
+  );
+}
+
+export default Child;
+----------------------------------------
