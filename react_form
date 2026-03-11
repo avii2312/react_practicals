@@ -1,57 +1,22 @@
-react-form-practical
-│
-├── node_modules
-├── public
-│     └── index.html
-│
-├── src
-│     ├── components
-│     │      └── RegistrationForm.js
-│     │
-│     ├── App.js
-│     ├── index.js
-│     └── App.css
-│
-├── package.json
-└── README.md
---------------------------------------------------------------------------------------------
-📂 src/index.js
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import { useState, useRef } from "react";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
------------------------------------
-📂 src/App.js
-import React from "react";
-import RegistrationForm from "./components/RegistrationForm";
+export default function FormHandling() {
 
-function App() {
-  return (
-    <div>
-      <RegistrationForm />
-    </div>
-  );
-}
-
-export default App;
---------------------------------------------------
-📂 src/components/RegistrationForm.js
-import React, { useState } from "react";
-
-function RegistrationForm() {
-
+  // Controlled component state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: ""
+    course: ""
   });
 
   const [submittedData, setSubmittedData] = useState(null);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  // Uncontrolled component reference
+  const ageRef = useRef();
+
+  // Handle input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
     setFormData({
       ...formData,
@@ -59,56 +24,78 @@ function RegistrationForm() {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // Handle form submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    setSubmittedData(formData);
+    const age = ageRef.current.value;
 
+    setSubmittedData({
+      ...formData,
+      age
+    });
+
+    // reset form
     setFormData({
       name: "",
       email: "",
-      password: ""
+      course: ""
     });
+
+    ageRef.current.value = "";
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "40px" }}>
-
-      <h2>Registration Form</h2>
+    <div style={{ padding: "30px", fontFamily: "Arial" }}>
+      <h2>React Form Handling Example</h2>
 
       <form onSubmit={handleSubmit}>
 
         <div>
-          <label>Name:</label>
+          <label>Name:</label><br />
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
+            required
           />
         </div>
 
         <br />
 
         <div>
-          <label>Email:</label>
+          <label>Email:</label><br />
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            required
           />
         </div>
 
         <br />
 
         <div>
-          <label>Password:</label>
+          <label>Course:</label><br />
           <input
-            type="password"
-            name="password"
-            value={formData.password}
+            type="text"
+            name="course"
+            value={formData.course}
             onChange={handleChange}
+            required
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Age (Uncontrolled):</label><br />
+          <input
+            type="number"
+            ref={ageRef}
+            placeholder="Enter age"
           />
         </div>
 
@@ -119,30 +106,29 @@ function RegistrationForm() {
       </form>
 
       {submittedData && (
-        <div>
+        <div style={{ marginTop: "30px" }}>
           <h3>Submitted Data</h3>
-          <p>Name: {submittedData.name}</p>
-          <p>Email: {submittedData.email}</p>
-          <p>Password: {submittedData.password}</p>
+          <p><b>Name:</b> {submittedData.name}</p>
+          <p><b>Email:</b> {submittedData.email}</p>
+          <p><b>Course:</b> {submittedData.course}</p>
+          <p><b>Age:</b> {submittedData.age}</p>
         </div>
       )}
-
     </div>
   );
 }
 
-export default RegistrationForm;
-------------------------------------------------------
-📂 public/index.html
-<!DOCTYPE html>
-<html>
-<head>
-<title>React Form Practical</title>
-</head>
 
-<body>
 
-<div id="root"></div>
+-------App.jsx--------
+import FormHandling from "./FormHandling";
 
-</body>
-</html>
+function App() {
+  return (
+    <div>
+      <FormHandling />
+    </div>
+  );
+}
+
+export default App;
