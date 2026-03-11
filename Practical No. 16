@@ -1,0 +1,70 @@
+import { useState, useEffect } from "react";
+
+// Child Component
+function ChildComponent({ greet }) {
+
+  // Mounting Phase
+  useEffect(() => {
+    console.log("Component Mounted");
+
+    // Unmounting Phase
+    return () => {
+      console.log("Component Unmounted");
+    };
+  }, []);
+
+  return (
+    <div>
+      <h3>Child Component</h3>
+
+      <button onClick={() => greet("React Student")}>
+        Click to Greet
+      </button>
+    </div>
+  );
+}
+
+// Parent Component
+export default function App() {
+
+  const [message, setMessage] = useState("");
+  const [showChild, setShowChild] = useState(true);
+
+  // Function passed to child
+  const greetUser = (name) => {
+    const msg = `Hello ${name}! Welcome to React Lifecycle Demo.`;
+    alert(msg);
+    setMessage(msg);
+  };
+
+  // Updating Phase
+  useEffect(() => {
+    if (message !== "") {
+      console.log("Component Updated - Message Changed");
+    }
+  }, [message]);
+
+  return (
+    <div style={{ padding: "30px", fontFamily: "Arial" }}>
+      <h2>React Lifecycle Example</h2>
+
+      {/* Passing function to child */}
+      {showChild && <ChildComponent greet={greetUser} />}
+
+      <br />
+
+      <button onClick={() => setShowChild(!showChild)}>
+        Toggle Child Component
+      </button>
+
+      <br /><br />
+
+      {message && (
+        <div>
+          <h3>Message</h3>
+          <p>{message}</p>
+        </div>
+      )}
+    </div>
+  );
+}
