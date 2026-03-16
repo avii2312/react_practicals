@@ -1,0 +1,58 @@
+import React, { useState } from "react";
+
+function App() {
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert("Form Submitted Successfully");
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "40px" }}>
+
+      <h1>Student Registration Form</h1>
+
+      <form onSubmit={handleSubmit}>
+
+        <div>
+          <label>Name:</label>
+          <br />
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Email:</label>
+          <br />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <br />
+
+        <button type="submit">Submit</button>
+
+      </form>
+
+      <hr />
+
+      <h2>Live Preview</h2>
+      <p>Name: {name}</p>
+      <p>Email: {email}</p>
+
+    </div>
+  );
+}
+
+export default App;
