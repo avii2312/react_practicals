@@ -1,0 +1,24 @@
+import React from "react";
+
+function App() {
+
+  const subjects = ["English", "Mathematics", "Science", "History", "Computer"];
+
+  return (
+    <div style={{ textAlign: "center" }}>
+
+      <h1>School Subject List</h1>
+
+      <ul>
+        {subjects.map((subject, index) => (
+          <li key={index}>
+            {index + 1}. {subject}
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  );
+}
+
+export default App;
