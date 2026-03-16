@@ -1,0 +1,30 @@
+import React from "react";
+
+function App() {
+
+  const items = ["Milk", "Bread", "Eggs", "Butter"];
+
+  return (
+    <div style={{ textAlign: "center" }}>
+
+      <h1>Shopping List</h1>
+
+      <h2>List Without Key</h2>
+      <ul>
+        {items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+
+      <h2>List With Key</h2>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+
+    </div>
+  );
+}
+
+export default App;
