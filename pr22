@@ -1,0 +1,61 @@
+App.js
+
+import React from "react";
+import "./App.css";
+import styles from "./App.module.css";
+
+function App() {
+
+  const inlineStyle = {
+    color: "white",
+    backgroundColor: "blue",
+    padding: "10px"
+  };
+
+  return (
+    <div style={{ textAlign: "center" }}>
+
+      <h1>React CSS Styling Methods</h1>
+
+      {/* Inline Styling */}
+      <h2 style={inlineStyle}>This is Inline Styling</h2>
+
+      {/* CSS Stylesheet */}
+      <h2 className="heading">This is CSS Stylesheet Styling</h2>
+
+      {/* CSS Module */}
+      <h2 className={styles.title}>This is CSS Module Styling</h2>
+
+      <button className="btn">Click Me</button>
+
+    </div>
+  );
+}
+
+export default App;
+
+
+-----------
+App.css
+
+.heading {
+  color: green;
+  background-color: lightyellow;
+  padding: 10px;
+}
+
+.btn {
+  background-color: orange;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+}
+
+-------------
+App.module.css
+
+.title {
+  color: purple;
+  background-color: lightgray;
+  padding: 10px;
+}
