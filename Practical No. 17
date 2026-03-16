@@ -1,0 +1,30 @@
+import React, { useState } from "react";
+
+function App() {
+
+  const [light, setLight] = useState("OFF");
+
+  const toggleLight = () => {
+    if (light === "OFF") {
+      setLight("ON");
+    } else {
+      setLight("OFF");
+    }
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+
+      <h1>Room Light Controller</h1>
+
+      <h2>Light is {light}</h2>
+
+      <button onClick={toggleLight}>
+        Toggle Light
+      </button>
+
+    </div>
+  );
+}
+
+export default App;
