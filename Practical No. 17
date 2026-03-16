@@ -2,25 +2,33 @@ import React, { useState } from "react";
 
 function App() {
 
-  const [light, setLight] = useState("OFF");
+  const [theme, setTheme] = useState("light");
 
-  const toggleLight = () => {
-    if (light === "OFF") {
-      setLight("ON");
+  const changeTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
     } else {
-      setLight("OFF");
+      setTheme("light");
     }
   };
 
+  const pageStyle = {
+    backgroundColor: theme === "light" ? "white" : "black",
+    color: theme === "light" ? "black" : "white",
+    height: "100vh",
+    textAlign: "center",
+    paddingTop: "50px"
+  };
+
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div style={pageStyle}>
 
-      <h1>Room Light Controller</h1>
+      <h1>Theme Changer App</h1>
 
-      <h2>Light is {light}</h2>
+      <h2>Current Theme: {theme}</h2>
 
-      <button onClick={toggleLight}>
-        Toggle Light
+      <button onClick={changeTheme}>
+        Change Theme
       </button>
 
     </div>
